@@ -167,7 +167,7 @@ function Cam() {
         <motion.div className="pane" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}>
           <span className="status"><span className={`dot ${room ? "wait" : "off"}`} aria-hidden="true" />{room ? `Room ${room}` : "No Room Code"}</span>
           <h1>{room ? "Use This Phone As The Camera" : "Scan The Code First"}</h1>
-          <p>{room ? "Your phone asks for the camera and the microphone once. The picture goes to the computer that showed you the code, over this Wi-Fi only." : "Open this page by scanning the code on the Bona page on your computer."}</p>
+          <p>{room ? "Camera and microphone, once. The picture goes only to the computer that showed you the code." : "Scan the code on the Bona page on your computer."}</p>
           {phase === "error" && <p className="hl">Camera not available: {err}. Check the site permissions for this page and try again.</p>}
           {room && <button className="btn" type="button" onClick={start}><Camera />Allow Camera And Microphone</button>}
         </motion.div>
@@ -197,7 +197,7 @@ function Cam() {
         <button className="btn small ghost" type="button" onClick={() => zoomStep(0.8)} aria-label="Zoom out">−</button>
         <button className="btn small ghost" type="button" onClick={resetCrop} disabled={crop.s <= 1.01}>Reset</button>
         {torchOk && <button className="btn small ghost" type="button" aria-pressed={torch} onClick={toggleTorch}><Torch />Light</button>}
-        <p className="cam-hint">Pinch to zoom, drag to frame. What you see here is what the computer sees.</p>
+        <p className="cam-hint">Pinch to zoom, drag to frame. This is what the computer sees.</p>
       </div>
     </div>
   );

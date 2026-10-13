@@ -142,7 +142,10 @@ main { max-width: var(--max); margin-inline: auto; padding: 0 var(--edge); }
 .band .btn { background: #fff; color: var(--navy); }
 @media (hover: hover) and (pointer: fine) { .band .btn:hover { background: var(--surface); } }
 footer { background: #0a1221; color: rgba(255, 255, 255, 0.55); padding: 22px var(--edge) 26px; font-size: 13px; }
-.foot-in { max-width: var(--max); margin-inline: auto; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.foot-in { max-width: var(--max); margin-inline: auto; display: grid; justify-items: center; gap: 10px; text-align: center; }
+.foot-line { color: rgba(255, 255, 255, 0.45); font-size: 12.5px; }
+.foot-credit { color: #fff; font-weight: 600; font-size: 14px; letter-spacing: 0.01em; border-bottom: 1px solid rgba(255, 255, 255, 0.25); padding-bottom: 1px; }
+.foot-credit:hover { border-bottom-color: #fff; }
 
 /* Phone page */
 .cam { position: fixed; inset: 0; background: #000; color: #fff; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
