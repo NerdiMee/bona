@@ -1,17 +1,10 @@
 import type { NextConfig } from "next";
+import { networkInterfaces } from "node:os";
+
+const lan = Object.values(networkInterfaces()).flat().filter((a) => a && a.family === "IPv4" && !a.internal).map((a) => a!.address);
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
+  allowedDevOrigins: [...lan, "localhost", "*.local"],
 };
 
 export default nextConfig;

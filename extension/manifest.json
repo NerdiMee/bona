@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Bona Phone Camera",
+  "version": "1.2.0",
+  "description": "Your phone, served by Bona on this computer, as a camera and microphone on the sites you allow.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:4601/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": [
+      "vendor/supabase.js",
+      "config.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Bona Phone Camera"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bona@nerdimee.io",
+      "strict_min_version": "128.0"
+    }
+  }
+}
