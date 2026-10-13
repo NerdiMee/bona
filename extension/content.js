@@ -2,6 +2,7 @@
  * Only messages from this very window are relayed, and the background re-checks the site's permission itself.
  * On the Bona site itself it also remembers the room code, so the extension knows which phone is yours. */
 (() => {
+  if (window.__bonaBridge) return; window.__bonaBridge = true;
   const CH = "bona-phone-camera"; let port = null;
   const connect = () => { port = chrome.runtime.connect({ name: "bona" }); port.onMessage.addListener((m) => window.postMessage({ [CH]: "res", m }, "*")); port.onDisconnect.addListener(() => { port = null; window.postMessage({ [CH]: "res", m: { wsClosed: true } }, "*"); }); };
   window.addEventListener("message", (e) => {

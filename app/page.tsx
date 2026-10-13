@@ -114,11 +114,11 @@ export default function Home() {
         <section className="sec" id="apps" aria-labelledby="apps-h">
           <div className="sec-head"><div><span className="eyebrow">In Your Meeting</span><h2 id="apps-h"><LensWord text="Three Taps, Once" /></h2></div></div>
           <ul className="guide">
-            <li><span className="n">1</span><h3>Add The Bona Extension</h3><p>Firefox: open the .xpi. Chrome: unzip, then Load unpacked at <code>chrome://extensions</code>.</p><a className="btn small" href="/bona-extension.xpi">Firefox<ArrowUpRight /></a> <a className="btn small ghost" href="/bona-extension.zip" style={{ marginLeft: 8 }}>Chrome<ArrowUpRight /></a></li>
-            <li><span className="n">2</span><h3>Allow The Site</h3><p>On Meet, Zoom, Teams or Discord in the browser, click the Bona button in the toolbar, then Allow. Reload once.</p></li>
+            <li><span className="n">1</span><h3>Add The Bona Extension</h3><p>Firefox Developer Edition: <code>about:debugging</code> → This Firefox → Load Temporary Add-on → the .xpi. Chrome: unzip, then Load unpacked at <code>chrome://extensions</code>.</p><a className="btn small" href="/bona-extension.xpi">Firefox<ArrowUpRight /></a> <a className="btn small ghost" href="/bona-extension.zip" style={{ marginLeft: 8 }}>Chrome<ArrowUpRight /></a></li>
+            <li><span className="n">2</span><h3>Allow The Site</h3><p>On Meet, Zoom, Teams or Discord in the browser, click the Bona button in the toolbar and choose Allow. The browser asks once for access to that site.</p></li>
             <li><span className="n">3</span><h3>Pick Bona Phone Camera</h3><p>In the app&rsquo;s camera settings. Done. <a className="hl" href="/try">Check it works</a>.</p></li>
           </ul>
-          <p className="fig-note" style={{ marginTop: 24 }}>Installed desktop apps need a camera driver Bona does not ship yet; use their web versions. The picture stays on your Wi-Fi, peer to peer; the relay only carries the handshake.</p>
+          <p className="fig-note" style={{ marginTop: 24 }}><b>No extension?</b> Open the Clean Window from the monitor above and share that window in the meeting (Share screen → Window). Works in every app, as a shared window rather than a camera. Installed desktop apps need a camera driver Bona does not ship yet. The picture stays on your Wi-Fi, peer to peer; the relay only carries the handshake.</p>
         </section>
       </main>
       <footer><div className="foot-in"><span className="foot-line">Bona · Broadcast Over Network Anywhere{room ? ` · Room ${room}` : ""}</span><a className="foot-credit" href="https://nerdimee.io" target="_blank" rel="noopener">Created By Nerdimee.io</a></div></footer>

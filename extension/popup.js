@@ -15,8 +15,18 @@
   const render = async () => {
     const { allowed = [] } = await chrome.storage.local.get("allowed"); const on = allowed.includes(origin);
     const b = $("toggle"); b.hidden = false; b.textContent = on ? "Stop Using Bona Here" : "Allow Bona On This Site"; b.className = on ? "off" : "";
-    $("siteNote").textContent = on ? "This site can pick Bona Phone Camera and Bona Phone Microphone. Reload the page once after changing this." : "Until you allow it, this site only sees your usual devices.";
+    $("siteNote").textContent = on ? "This site can pick Bona Phone Camera and Bona Phone Microphone. If its device list does not show them yet, reload the page once." : "Until you allow it, this site only sees your usual devices.";
   };
-  $("toggle").onclick = async () => { const { allowed = [] } = await chrome.storage.local.get("allowed"); const next = allowed.includes(origin) ? allowed.filter((o) => o !== origin) : [...allowed, origin]; await chrome.storage.local.set({ allowed: next }); render(); };
+  $("toggle").onclick = async () => {
+    const { allowed = [] } = await chrome.storage.local.get("allowed");
+    if (allowed.includes(origin)) { await chrome.storage.local.set({ allowed: allowed.filter((o) => o !== origin) }); render(); return; }
+    /* Firefox only runs our scripts on a site once it has been granted; Chrome grants declared sites up front but is happy to be asked. */
+    let granted = true; try { granted = await chrome.permissions.request({ origins: [origin + "/*"] }); } catch { granted = true; }
+    if (!granted) { $("siteNote").textContent = "Bona needs access to this site to add the camera. Try again and choose Allow."; return; }
+    await chrome.storage.local.set({ allowed: [...allowed, origin] });
+    /* Inject right away, so the open tab works without a reload. Later loads come from the manifest. */
+    try { const [tab] = await chrome.tabs.query({ active: true, currentWindow: true }); if (tab && tab.id != null) { await chrome.scripting.executeScript({ target: { tabId: tab.id, allFrames: true }, files: ["content.js"] }); await chrome.scripting.executeScript({ target: { tabId: tab.id, allFrames: true }, world: "MAIN", files: ["inject.js"] }); } } catch { /* page may be restricted; a reload will do it */ }
+    render();
+  };
   render();
 })();
